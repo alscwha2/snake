@@ -25,5 +25,5 @@ For unix-based operating systems
 ```
 curl -o snake https://raw.githubusercontent.com/alscwha2/snake/main/snake
 chmod +x snake
-snake -h
+./snake -h
 ```
