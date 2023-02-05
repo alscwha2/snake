@@ -1,7 +1,7 @@
 # Snake
 Terminal based implementation of classic snake game.
 
-##Files:
+## Files:
 Snake - The full script for the game.
 Snake_code_snippets.py - selected code snippets containing the core functionality of the game, for Broadway round 1 interview.
 
