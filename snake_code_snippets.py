@@ -51,7 +51,7 @@ TODO:
     [] find a way to make the output display normally when using threads
     [] implement regular mode with one thread
     [] track high scores
-    [] allow array keys to be used instead of WASD
+    [] allow arrow keys to be used instead of WASD
     [] ensure that the game works with odd sized boards
 
 Notes:
