@@ -23,7 +23,7 @@ Steer with wasd. Press any button to advance one tile in the current direction. 
 ## Run
 For unix-based operating systems
 ```
-curl -o snake https://github.com/alscwha2/snake/blob/main/snake
+curl -o snake https://raw.githubusercontent.com/alscwha2/snake/main/snake
 chmod +x snake
 snake -h
 ```
