@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 
 """
+This file contains exactly 150 lines of code, excluding imports, comments, and empty lines.
+
+The most interesting and important functions of the snake script were kept while others were
+scrapped. Calls to removed functions still exist in this code, therefore this script is not 
+runnable. See the full version at https://github.com/alscwha2/snake/blob/main/snake.
 Welcome to command line snake! 
 
 How to play:
