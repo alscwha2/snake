@@ -7,7 +7,15 @@ Terminal based implementation of classic snake game.
 
 <img src="https://raw.githubusercontent.com/alscwha2/images/main/manual.gif" alt="snake_gif"/>
 
+## Game modes
+### Regular Mode
+Steer with wasd. Press q any time to exit. This mode is a work in progress, as output is being corrupted due to a bug involving multiple threads piping output to a terminal.
+### Manual Mode
+Steer with wasd. Press any button to advance one tile in the current direction. Press q at any time to quit.
+
+
 ## Solver
+### Watch the game play itself
 <img src="https://raw.githubusercontent.com/alscwha2/images/main/solver.gif" alt="snake_gif"/>
 
 ## Run
