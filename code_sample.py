@@ -2,6 +2,7 @@
 
 """
 Snippets taken from: https://github.com/alscwha2/snake/blob/main/snake
+
 Check out the repo README for a demo: https://github.com/alscwha2/snake
 
 This file contains exactly 148 lines of code, excluding imports, comments, and empty lines.
@@ -53,9 +54,14 @@ TODO:
     [] track high scores
     [] allow arrow keys to be used instead of WASD
     [] ensure that the game works with odd sized boards
+    [] display instructions during gameplay
+    [] refactor collision checks
+    [] re-implement game win
+    [] early exit from solver
 
 Notes:
     * Collision and eating checks are done in the move_head function
+    * Trying to move the head into the position of the tail will cause a collision.
 """
 import os
 import termios
@@ -71,11 +77,10 @@ from time import sleep
 ################################################################################
 
 # game parameters
-BOARD_SIZE = 18
-INITIAL_SNAKE_LENGTH = 5
-SOLVER_TICK_SPEED = 0.05
-TICK = 0.2
-AUTO_NEW_GAME = False # may be set by supplying -a --auto argument
+BOARD_SIZE = 18  # may be set by supplying -b --board-size argument
+INITIAL_SNAKE_LENGTH = 2
+TICK = 0.2  # may be set by supplying -t --tick argument
+AUTO_NEW_GAME = False  # may be set by supplying -a --auto argument
 
 # directions
 UP, RIGHT, DOWN, LEFT = (-1, 0), (0, 1), (1, 0), (0, -1)
@@ -123,6 +128,8 @@ def move(end, direction):
 
 
 ######################################## HEAD ##################################
+
+
 def check_ate():
     global ate
     ate = read_board_char(head) == 'X'
@@ -172,6 +179,7 @@ def update_tail():
 
 ############################# GAME INITIALIZATION ###############################
 
+
 def initialize_game():
     initialize_variables()
     initialize_empty_board()
@@ -179,6 +187,7 @@ def initialize_game():
     place_food()
 
 ############################# DRAW GAME ########################################
+
 
 def print_game():
     draw_board()
@@ -230,6 +239,10 @@ def place_food_and_check_win():
 
 
 def update_game():
+    # update head before tail. Head will collide with tail when trying to occupy
+    #   the tile that the end of the tail is currently occupying.
+    # This behavior is consistent with the Google Snake implementation.
+    # To change this behavior, switch the order of the next two function calls.
     move_head(next_direction)
     update_tail()
     place_food_and_check_win()
@@ -245,9 +258,11 @@ def update_game_loop():
 ############################# PLAY GAME ########################################
 ################################################################################
 
+
 def regular_mode():
     Thread(target=update_game_loop, daemon=True).start()
     Thread(target=watch_and_execute_commands).start()
+
 
 def manual_mode():
     while True:
@@ -301,7 +316,7 @@ def solve():
     global next_direction
     while not crashed:
         print_game()
-        sleep(SOLVER_TICK_SPEED)
+        sleep(TICK)
         next_direction = get_next_solution_step()
         update_game()
 
@@ -312,10 +327,14 @@ def solve():
 
 def main():
     args = parse_args()
-    global AUTO_NEW_GAME
+    global AUTO_NEW_GAME, TICK, BOARD_SIZE
+
     AUTO_NEW_GAME = args.auto
+    BOARD_SIZE = args.board_size + 2
+    TICK = args.tick
 
     initialize_game()
+
     if args.mode == 'manual':
         manual_mode()
     elif args.mode == 'solver':

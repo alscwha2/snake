@@ -64,12 +64,12 @@ from time import sleep
 ########################### Constants ##########################################
 ################################################################################
 
+
 # game parameters
-BOARD_SIZE = 18
-INITIAL_SNAKE_LENGTH = 5
-SOLVER_TICK_SPEED = 0.05
-TICK = 0.2
-AUTO_NEW_GAME = False # may be set by supplying -a --auto argument
+BOARD_SIZE = 18  # may be set by supplying -b --board-size argument
+INITIAL_SNAKE_LENGTH = 2
+TICK = 0.2  # may be set by supplying -t --tick argument
+AUTO_NEW_GAME = False  # may be set by supplying -a --auto argument
 
 # directions
 UP, RIGHT, DOWN, LEFT = (-1, 0), (0, 1), (1, 0), (0, -1)
@@ -82,6 +82,7 @@ BOTTOM_LEFT, BOTTOM_RIGHT, TOP_LEFT, TOP_RIGHT = '\u255A', '\u255D', '\u2554', '
 ################################################################################
 ########################### GLOBAL VARIABLES ###################################
 ################################################################################
+
 
 board = [[]]
 empty_tiles = []
@@ -97,9 +98,11 @@ tail_direction = RIGHT
 crashed = False
 ate = False
 
+
 ################################################################################
 ########################### FUNCTION DEFINITIONS ###############################
 ################################################################################
+
 
 ############################### BOARD ##########################################
 
@@ -255,6 +258,7 @@ def update_tail():
 
 ############################# GAME INITIALIZATION ###############################
 
+
 def initialize_variables():
     global crashed, ate, snake_length
     crashed = False
@@ -276,7 +280,9 @@ def initialize_game():
     initialize_snake()
     place_food()
 
+
 ############################# DRAW GAME ########################################
+
 
 def draw_board():
     os.system('clear')
@@ -373,9 +379,11 @@ def update_game_loop():
         sleep(TICK)
         update_game()
 
+
 ################################################################################
 ############################# PLAY GAME ########################################
 ################################################################################
+
 
 def ask_play_again():
     print("Game Over!\nPlay Again? (y/n)")
@@ -387,9 +395,11 @@ def ask_play_again():
         elif command == "n":
             sys.exit(0)
 
+
 def regular_mode():
     Thread(target=update_game_loop, daemon=True).start()
     Thread(target=watch_and_execute_commands).start()
+
 
 def manual_mode():
     while True:
@@ -443,7 +453,7 @@ def solve():
     global next_direction
     while not crashed:
         print_game()
-        sleep(SOLVER_TICK_SPEED)
+        sleep(TICK)
         next_direction = get_next_solution_step()
         update_game()
 
@@ -451,6 +461,7 @@ def solve():
 ################################################################################
 ############################# APPLICATION LOGIC ################################
 ################################################################################
+
 
 def parse_args():
     default_game_mode = 'manual'
@@ -471,14 +482,23 @@ def parse_args():
                         action='store_const', const='solver', dest='mode', help='watch as the game plays itself')
     parser.add_argument('-a', '--auto',
                         action='store_true', help='automatically start a new game on crash')
+    parser.add_argument('-t', '--tick',
+                        type=float, help='tick duration, in seconds', metavar="SECONDS", default=0.2)
+    parser.add_argument('-b', '--board-size',
+                        type=int, help='board size', metavar="TILES", default=16)
     return parser.parse_args()
+
 
 def main():
     args = parse_args()
-    global AUTO_NEW_GAME
+    global AUTO_NEW_GAME, TICK, BOARD_SIZE
+
     AUTO_NEW_GAME = args.auto
+    BOARD_SIZE = args.board_size + 2
+    TICK = args.tick
 
     initialize_game()
+
     if args.mode == 'manual':
         manual_mode()
     elif args.mode == 'solver':
@@ -486,4 +506,6 @@ def main():
     elif args.mode == 'regular':
         regular_mode()
 
+
 main()
+
