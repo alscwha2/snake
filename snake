@@ -40,11 +40,16 @@ TODO:
     [] find a way to make the output display normally when using threads
     [] implement regular mode with one thread
     [] track high scores
-    [] allow array keys to be used instead of WASD
+    [] allow arrow keys to be used instead of WASD
     [] ensure that the game works with odd sized boards
+    [] display instructions during gameplay
+    [] refactor collision checks
+    [] re-implement game win
+    [] early exit from solver
 
 Notes:
     * Collision and eating checks are done in the move_head function
+    * Trying to move the head into the position of the tail will cause a collision.
 """
 import os
 import termios
@@ -83,6 +88,7 @@ empty_tiles = []
 
 head = (0, 0)
 tail = (0, 0)
+snake_length = INITIAL_SNAKE_LENGTH
 
 next_direction = RIGHT
 head_direction = RIGHT
@@ -90,7 +96,6 @@ tail_direction = RIGHT
 
 crashed = False
 ate = False
-snake_length = INITIAL_SNAKE_LENGTH
 
 ################################################################################
 ########################### FUNCTION DEFINITIONS ###############################
@@ -340,6 +345,10 @@ def watch_and_execute_commands():
 
 
 def update_game():
+    # update head before tail. Head will collide with tail when trying to occupy
+    #   the tile that the end of the tail is currently occupying.
+    # This behavior is consistent with the Google Snake implementation.
+    # To change this behavior, switch the order of the next two function calls.
     move_head(next_direction)
     update_tail()
     if ate:
@@ -347,7 +356,7 @@ def update_game():
         snake_length += 1
         try:
             place_food()
-        except IndexError:
+        except IndexError:  # if there are no more empty tiles to place food, you win
             global crashed
             crashed = True
             print_game()
@@ -381,11 +390,9 @@ def regular_mode():
 def manual_mode():
     while True:
         if crashed:
-            if AUTO_NEW_GAME:
-                initialize_game()
-            else:
+            if not AUTO_NEW_GAME:
                 ask_play_again()
-                initialize_game()
+            initialize_game()
 
         print_game()
         command = get_char()
