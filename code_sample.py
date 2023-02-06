@@ -94,6 +94,7 @@ empty_tiles = []
 
 head = (0, 0)
 tail = (0, 0)
+snake_length = INITIAL_SNAKE_LENGTH
 
 next_direction = RIGHT
 head_direction = RIGHT
@@ -101,7 +102,6 @@ tail_direction = RIGHT
 
 crashed = False
 ate = False
-snake_length = INITIAL_SNAKE_LENGTH
 
 ################################################################################
 ########################### FUNCTION DEFINITIONS ###############################
@@ -224,7 +224,7 @@ def update_game():
         snake_length += 1
         try:
             place_food()
-        except IndexError:
+        except IndexError:  # if there are no more empty tiles to place food, you win
             global crashed
             crashed = True
             print_game()
@@ -248,11 +248,9 @@ def regular_mode():
 def manual_mode():
     while True:
         if crashed:
-            if AUTO_NEW_GAME:
-                initialize_game()
-            else:
+            if not AUTO_NEW_GAME:
                 ask_play_again()
-                initialize_game()
+            initialize_game()
 
         print_game()
         command = get_char()
