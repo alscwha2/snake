@@ -216,9 +216,7 @@ def watch_and_execute_commands():
 ############################## RUN GAME ########################################
 
 
-def update_game():
-    move_head(next_direction)
-    update_tail()
+def place_food_and_check_win():
     if ate:
         global snake_length
         snake_length += 1
@@ -229,6 +227,12 @@ def update_game():
             crashed = True
             print_game()
             print("You Win!")
+
+
+def update_game():
+    move_head(next_direction)
+    update_tail()
+    place_food_and_check_win()
 
 
 def update_game_loop():
