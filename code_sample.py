@@ -5,7 +5,7 @@ Snippets taken from: https://github.com/alscwha2/snake/blob/main/snake
 
 Check out the repo README for a demo: https://github.com/alscwha2/snake
 
-This file contains exactly 151 lines of code, excluding imports, comments, and empty lines.
+This file contains exactly 148 lines of code, excluding imports, comments, and empty lines.
 
 The most interesting and important functions of the snake script were kept while others were
 scrapped. Calls to removed functions still exist in this code, therefore this script is not 
@@ -32,8 +32,8 @@ Modes:
         Exit early with CTRL+C
 
 
-
 usage: snake [-h] [--mode {regular,manual,solver}] [-r] [-m] [-s] [-a]
+             [-t SECONDS] [-b TILES]
 
 Play snake from the command line
 
@@ -45,8 +45,13 @@ options:
   -m                    play game in manual mode
   -s                    watch as the game plays itself
   -a, --auto            automatically start a new game on crash
+  -t SECONDS, --tick SECONDS
+                        tick duration, in seconds
+  -b TILES, --board-size TILES
+                        board size
 
 open an issue at https://github.com/alscwha2/scripts/issues
+
 
 TODO:
     [] find a way to make the output display normally when using threads
