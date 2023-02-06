@@ -82,7 +82,7 @@ BOARD_SIZE = 18
 INITIAL_SNAKE_LENGTH = 5
 SOLVER_TICK_SPEED = 0.05
 TICK = 0.2
-AUTO_NEW_GAME = False # may be changed by supplying -a --auto argument
+AUTO_NEW_GAME = False # may be set by supplying -a --auto argument
 
 
 ################################################################################
