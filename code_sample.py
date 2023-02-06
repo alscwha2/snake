@@ -70,19 +70,19 @@ from time import sleep
 ########################### Constants ##########################################
 ################################################################################
 
-# directions
-UP, RIGHT, DOWN, LEFT = (-1, 0), (0, 1), (1, 0), (0, -1)
-
-# snake pieces
-HORIZONTAL, VERTICAL = '\u2550', '\u2551'
-BOTTOM_LEFT, BOTTOM_RIGHT, TOP_LEFT, TOP_RIGHT = '\u255A', '\u255D', '\u2554', '\u2557'
-
 # game parameters
 BOARD_SIZE = 18
 INITIAL_SNAKE_LENGTH = 5
 SOLVER_TICK_SPEED = 0.05
 TICK = 0.2
 AUTO_NEW_GAME = False # may be set by supplying -a --auto argument
+
+# directions
+UP, RIGHT, DOWN, LEFT = (-1, 0), (0, 1), (1, 0), (0, -1)
+
+# snake pieces
+HORIZONTAL, VERTICAL = '\u2550', '\u2551'
+BOTTOM_LEFT, BOTTOM_RIGHT, TOP_LEFT, TOP_RIGHT = '\u255A', '\u255D', '\u2554', '\u2557'
 
 
 ################################################################################
