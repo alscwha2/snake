@@ -10,7 +10,9 @@ Terminal based implementation of classic snake game.
 ## Game modes
 ### Regular Mode
 `snake -r`  
-Steer with wasd. Press q any time to exit. This mode is a work in progress, as output is being corrupted due to a bug involving multiple threads piping output to a terminal.
+Steer with wasd. Press q any time to exit.  
+This mode is a work in progress, as output is being corrupted due to a bug involving multiple threads piping output to a terminal.  
+See [regular_mode_output.txt](https://github.com/alscwha2/snake/blob/main/regular_mode_output.txt) for what the output is supposed to look like.
 ### Manual Mode
 `snake [-m]`  
 Steer with wasd. Press any button to advance one tile in the current direction. Press q at any time to quit.
