@@ -17,6 +17,7 @@ Steer with wasd. Press any button to advance one tile in the current direction. 
 
 
 ## Solver
+`snake -s`  
 ### Watch the game play itself
 <img src="https://raw.githubusercontent.com/alscwha2/images/main/solver.gif" alt="snake_gif"/>
 
