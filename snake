@@ -42,6 +42,7 @@ open an issue at https://github.com/alscwha2/scripts/issues
 
 
 TODO:
+    [] fix bug to allow snake size to be 1
     [] find a way to make the output display normally when using threads
     [] implement regular mode with one thread
     [] track high scores
@@ -85,7 +86,7 @@ BOTTOM_LEFT, BOTTOM_RIGHT, TOP_LEFT, TOP_RIGHT = '\u255A', '\u255D', '\u2554', '
 
 
 ################################################################################
-########################### GLOBAL VARIABLES ###################################
+################################# GAME STATE ###################################
 ################################################################################
 
 
